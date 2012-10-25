@@ -45,6 +45,12 @@ exports.handleJsonRpc = function (requestObject,callback){
     }
     
     function callMethod(method,params,id) {
+        if (!methodLib.hasOwnProperty(method)) {
+            return callback("method does not exist",null);
+        }
+        if (typeof methodLib[method] !== 'function'){
+            return callback("method is not a function",null);
+        }
         methodLib[method](params,id,function (error,result) {
                           // the method returned an error
                           if (error!==null) {

@@ -11,10 +11,11 @@ function connect(socket) {
     .on('data',function(data) {
         try {
         var requestObject = JSON.parse(data);
+        
         rpcHandler.handleJsonRpc(requestObject, function (error,result) {
                                  // Log the error
                                  if (error!==null) {
-                                 return console.log("JSON processing error",error);
+                                 return console.log("JSON processing error:",error);
                                  }
                                  
                                  // Send the result
